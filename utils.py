@@ -4,7 +4,8 @@ from razdel import sentenize
 from translate import Translator
 from wiki_ru_wordnet import WikiWordnet
 
-from fact_extractor import find_first_number_obj_with_given_num
+from facts.fact_extractor import Fact_extractor
+from ner.ner_extractor import NER_extractor
 
 
 def translate_text(text, from_lang, to_lang) -> str:
@@ -107,7 +108,8 @@ def compare_ner_facts(source_ner_facts, text_ner_facts):
             different_values = list(set(text_values) - set(source_values))
             if len(different_values) > 0:
                 if len(different_values) != 1 or different_values[0] != 'covid-19':
-                    message = f"\nВ тексте появились сущности типа {ner_types[key]}, не совпадающие с сущностями этого типа в источнике: \n"
+                    message = f"\nВ тексте появились сущности типа {ner_types[key]}, не совпадающие " \
+                              f"с сущностями этого типа в источнике: \n"
 
                     diff_facts = [fact for fact in text_ner_fact if
                                   fact["Normal spans"] in different_values and fact["Normal spans"] != "covid-19"]
@@ -123,3 +125,19 @@ def compare_ner_facts(source_ner_facts, text_ner_facts):
                  text_ner_facts[key]])
             error_messages.append(f"{message}{text_fact_texts}")
     return error_messages
+
+
+def find_first_number_obj_with_given_num(num_fact, num):
+    for numbers in num_fact:
+        if numbers['number'] == num:
+            return numbers
+
+
+def get_facts_from_text(text: str):
+    ner_extractor_obj = NER_extractor()
+    fact_extractor_obj = Fact_extractor()
+
+    _, numerical_facts = fact_extractor_obj.extract_fact_from_text(text)
+    ner_facts = ner_extractor_obj.get_ner_elements(text)
+
+    return numerical_facts, ner_facts

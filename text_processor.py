@@ -1,7 +1,6 @@
 import re
 import string
-import os
-import joblib
+
 import nltk
 from nltk.corpus import stopwords, wordnet
 

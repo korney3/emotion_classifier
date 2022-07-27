@@ -1,15 +1,14 @@
 from typing import Tuple, List
 
-from scipy.stats import cosine
+from scipy.spatial.distance import cosine
 
-from clickbait_predictor import Clickbait_predictor
-from fact_extractor import get_facts_from_text
-from rationality_intuition_scorer import Rationality_intuition_scorer
-from sentiment_extractor import Sentiment_extractor
-from utils import translate_text, compare_numerical_facts, compare_ner_facts
+from clickbait.clickbait_predictor import Clickbait_predictor
+from rationality_intuition.rationality_intuition_scorer import Rationality_intuition_scorer
+from sentiment.sentiment_extractor import Sentiment_extractor
+from utils import translate_text, compare_numerical_facts, compare_ner_facts, get_facts_from_text
 
 
-def text_source_sentiment_score(text, title, text_source, title_source) -> float:  # delta_tone_vector
+def text_source_sentiment_score(text, title, text_source, title_source) -> float:
     """
     :param text: Текст статьи(новости)
     :param title: Заголовок новости
@@ -33,9 +32,9 @@ def get_sentiment_scores(text, title) -> List[float]:
     """
     :param text: Текст статьи(новости)
     :param title: Заголовок новости
-    :return: Текст статьи(новости) str и
-    результаты анализа текста в виде: Dict ["positive": float, "negative": float, "neutral": float, "skip": float,
-    "speech": float, "clickbait_score":float]
+    :return:
+    результаты анализа текста в виде: List ["positive": float, "negative": float, "neutral": float, "skip": float,
+    "speech": float, "clickbait_score": float]
     """
 
     sentiment_extractor_obj = Sentiment_extractor()
@@ -55,11 +54,11 @@ def get_sentiment_scores(text, title) -> List[float]:
     return text_vector
 
 
-def text_source_facts_comparison(text, text_source) -> Tuple[float, float, str]:
+def text_source_facts_comparison(text, text_source) -> Tuple[int, int, str]:
     """
     :param text: Текст статьи(новости)
     :param text_source: Текст статьи(новости) источника
-    :return: list of error messages для фактов-числительных and list of errors messages для фактов-объектов
+    :return: Tuple: количество искаженых численных фактов, количество искаженных фактов-сущностей, сообщение с ошибочными фактами
     """
     text_numerical_facts, text_ner_facts = get_facts_from_text(text)
     source_numerical_facts, source_ner_facts = get_facts_from_text(text_source)

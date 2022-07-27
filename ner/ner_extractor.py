@@ -1,8 +1,7 @@
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Any, Optional
 
 import pymorphy2
-from natasha import Segmenter, MorphVocab, NewsEmbedding, NewsNERTagger, NewsMorphTagger, NewsSyntaxParser, \
-    NamesExtractor, DatesExtractor, MoneyExtractor, AddrExtractor, Doc
+from natasha import Segmenter, MorphVocab, NewsEmbedding, NewsNERTagger, Doc
 from razdel import sentenize
 
 
@@ -16,7 +15,7 @@ class NER_extractor:
 
         self.morph = pymorphy2.MorphAnalyzer()
 
-    def get_ner_elements(self, text_rus: str) -> List[Dict[str, Union[str, int]]]:
+    def get_ner_elements(self, text_rus: str) -> dict[Any, list[dict[str, Optional[Any]]]]:
         """
 
         :param text_rus: Piece of text in string format. Can be sentence or whole article
@@ -32,8 +31,10 @@ class NER_extractor:
         for span in doc.spans:
             span.normalize(self.morph_vocab)
 
-        spans_data = [{"Normal spans": self.morph.parse(span.normal)[0].normal_form, "Type": span.type, "start": span.start, "end": span.stop}
-                      for span in doc.spans]
+        spans_data = [
+            {"Normal spans": self.morph.parse(span.normal)[0].normal_form, "Type": span.type, "start": span.start,
+             "end": span.stop}
+            for span in doc.spans]
 
         return self.process_ners(spans_data, text_rus)
 
@@ -41,15 +42,17 @@ class NER_extractor:
         sentences = list(sentenize(text))
         processed_spans_data = {}
         for span_data in spans_data:
-            span_object = {"Normal spans": span_data["Normal spans"], 'start': span_data["start"], 'end': span_data["end"], 'sentence':
-                           self.get_sentence_with_fact(sentences, span_data)}
+            span_object = {"Normal spans": span_data["Normal spans"], 'start': span_data["start"],
+                           'end': span_data["end"], 'sentence':
+                               self.get_sentence_with_fact(sentences, span_data)}
             if span_data["Type"] in processed_spans_data.keys():
                 processed_spans_data[span_data["Type"]].append(span_object)
             else:
                 processed_spans_data[span_data["Type"]] = [span_object]
         return processed_spans_data
 
-    def get_sentence_with_fact(self, sentences, span):
+    @staticmethod
+    def get_sentence_with_fact(sentences, span):
         for sentence in sentences:
             if span['start'] >= sentence.start and span['end'] <= sentence.stop:
                 return sentence.text

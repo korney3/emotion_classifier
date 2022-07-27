@@ -1,8 +1,7 @@
 from natasha import MorphVocab
-
-from data_science.number import NUMBER
 from natasha.extractors import Extractor
-from yargy.parser import Match
+
+from facts.number import NUMBER
 
 
 class NumberExtractor(Extractor):

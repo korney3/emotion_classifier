@@ -16,8 +16,8 @@ class Clickbait_predictor:
     def __init__(self):
         self.text_processor = Text_processor()
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        self.model = joblib.load(os.path.join(current_dir, "models", "clickbait_linear_classifier.joblib"))
-        self.tfidf_vectorizer = joblib.load(os.path.join(current_dir, "models", "clickbait_tfidf_vectorizer.joblib"))
+        self.model = joblib.load(os.path.join(current_dir, "../models", "clickbait_linear_classifier.joblib"))
+        self.tfidf_vectorizer = joblib.load(os.path.join(current_dir, "../models", "clickbait_tfidf_vectorizer.joblib"))
 
     def get_clickbait_score(self, title_eng: str) -> float:
         """

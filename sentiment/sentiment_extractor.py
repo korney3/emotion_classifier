@@ -6,6 +6,7 @@ import plotly.express as px
 import razdel
 from dostoevsky.models import FastTextSocialNetworkModel
 from dostoevsky.tokenization import RegexTokenizer
+from plotly.graph_objs import Figure
 
 
 class Sentiment_extractor:
@@ -13,7 +14,7 @@ class Sentiment_extractor:
         self.tokenizer = RegexTokenizer()
         self.model = FastTextSocialNetworkModel(tokenizer=self.tokenizer)
 
-    def get_sentiment_scores(self, text_rus: str) -> Tuple[Dict[str, float], plotly.graph_objects.Figure]:
+    def get_sentiment_scores(self, text_rus: str) -> tuple[Mapping, Figure]:
         """
 
         :param text_rus: Piece of text in string format. Can be sentence or whole article

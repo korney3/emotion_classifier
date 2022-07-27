@@ -1,17 +1,16 @@
 import os
-from typing import Tuple, Mapping
+from typing import Mapping
 
 import yaml
-from nltk.tokenize import word_tokenize
 
-from data_science.text_processor import Text_processor
+from text_processor import Text_processor
 
 
 class Rationality_intuition_scorer:
     def __init__(self):
         current_dir = os.path.dirname(os.path.abspath(__file__))
         self.text_processor = Text_processor()
-        with open(os.path.join(current_dir, "models", 'rational_intuitive_keywords_rus.yml'), encoding='utf8') as file:
+        with open(os.path.join(current_dir, "../models", 'rational_intuitive_keywords_rus.yml'), encoding='utf8') as file:
             # The FullLoader parameter handles the conversion from YAML
             # scalar values to Python the dictionary format
             keywords_rational_intuitive = yaml.load(file, Loader=yaml.FullLoader)

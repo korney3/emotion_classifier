@@ -1,10 +1,10 @@
 import re
 
-from yargy import rule, or_, and_, Parser
-from yargy.pipelines import morph_pipeline, caseless_pipeline
-from yargy.interpretation import fact, const, attribute
-from yargy.predicates import eq, caseless, normalized, type, gram, in_
 from yargy import interpretation as interp
+from yargy import rule, or_
+from yargy.interpretation import fact, const, attribute
+from yargy.pipelines import morph_pipeline, caseless_pipeline
+from yargy.predicates import eq, caseless, normalized, type, gram, in_
 
 Number = fact('Number', ['int', 'multiplier'])
 NUMS_ORDINAL = {
@@ -105,7 +105,6 @@ NUMS_ORDINAL = {
     'четырехсотая': 400,
     'четырехсотое': 400,
     'пятисотый': 500,
-    'пятисотое': 500,
     'пятисотое': 500,
     'шестисотый': 600,
     'шестисотая': 600,
@@ -228,7 +227,7 @@ NUMBER = or_(
 
 
 def normalize_float(value):
-    value = re.sub('[\s,.]+', '.', value)
+    value = re.sub('[\s,.]+', '..', value)
     return float(value)
 
 
@@ -271,11 +270,6 @@ NOUNS = NOUN.repeatable(max=1).interpretation(
 Number_fact = fact(
     'Number fact',
     [attribute('number').repeatable(), attribute('adjs').repeatable(), attribute('nouns').repeatable()])
-
-
-def normalize_float(value):
-    value = re.sub('[\s,.]+', '.', value)
-    return float(value)
 
 
 FLOAT = rule(
