@@ -1,1 +1,1 @@
-from clickbait_predictor import Clickbait_predictor
+from .clickbait_predictor import Clickbait_predictor
