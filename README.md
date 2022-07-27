@@ -12,6 +12,7 @@ nltk.download('omw-1.4')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
 python -m dostoevsky download fasttext-social-network-model
+pip install git+https://github.com/korney3/fact_extractor_emotion_classifier
 ```
 
 
