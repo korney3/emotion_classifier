@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name='data_science_module',
-    version='0.0.1',
+    version='0.0.2',
     author='korney3',
     author_email='koren.iz3x@yandex.ru',
     description='Testing installation of Package',
@@ -16,7 +16,8 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/korney3/fact_extractor_emotion_classifier/issues"
     },
     license='MIT',
-    packages=['data_science_module'],
+
+    packages=setuptools.find_packages(),
     install_requires=['jupyter', 'natasha', 'pandas', "plotly", 'dostoevsky', 'pyyaml', 'scikit-learn', 'nltk',
                       'translate', 'openpyxl', 'wiki-ru-wordnet'],
 )
