@@ -3,6 +3,9 @@
 
 ## Установка
 
+### Requirements
+python==3.9
+
 ```
 python -m dostoevsky download fasttext-social-network-model
 ```
