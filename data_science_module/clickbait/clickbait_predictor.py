@@ -4,7 +4,7 @@ import os
 import joblib
 import nltk
 
-from text_processor import Text_processor
+from data_science_module.text_processor import Text_processor
 
 nltk.download('stopwords')
 nltk.download('omw-1.4')

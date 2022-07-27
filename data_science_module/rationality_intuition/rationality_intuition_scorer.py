@@ -3,7 +3,7 @@ from typing import Mapping
 
 import yaml
 
-from text_processor import Text_processor
+from data_science_module.text_processor import Text_processor
 
 
 class Rationality_intuition_scorer:

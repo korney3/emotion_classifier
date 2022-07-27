@@ -1,7 +1,7 @@
 from collections import Counter
 from itertools import accumulate
 
-from text_processor import Text_processor
+from data_science_module.text_processor import Text_processor
 
 
 def get_paragraph_sources(text: str, words_ids: list[int], source_urls: list[str],

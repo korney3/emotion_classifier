@@ -1,7 +1,7 @@
 from natasha import MorphVocab
 from natasha.extractors import Extractor
 
-from facts.number import NUMBER
+from data_science_module.facts.number import NUMBER
 
 
 class NumberExtractor(Extractor):

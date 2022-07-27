@@ -227,7 +227,7 @@ NUMBER = or_(
 
 
 def normalize_float(value):
-    value = re.sub('[\s,.]+', '..', value)
+    value = re.sub('[\s,.]+', '../..', value)
     return float(value)
 
 

@@ -4,8 +4,8 @@ from razdel import sentenize
 from translate import Translator
 from wiki_ru_wordnet import WikiWordnet
 
-from facts.fact_extractor import Fact_extractor
-from ner.ner_extractor import NER_extractor
+from data_science_module.facts.fact_extractor import Fact_extractor
+from data_science_module.ner import NER_extractor
 
 
 def translate_text(text, from_lang, to_lang) -> str:

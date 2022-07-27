@@ -5,8 +5,8 @@ from yargy import (
     Parser
 )
 
-from facts.number import NUMBER_FACT
-from facts.number_extractor import NumberExtractor
+from data_science_module.facts.number import NUMBER_FACT
+from data_science_module.facts.number_extractor import NumberExtractor
 
 
 class Fact_extractor:
