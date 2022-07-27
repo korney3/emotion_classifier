@@ -1,19 +1,15 @@
 # TO-DO
-import re
-import string
 import os
+
 import joblib
 import nltk
-from nltk.corpus import stopwords, wordnet
 
-from data_science.text_processor import Text_processor
+from text_processor import Text_processor
 
 nltk.download('stopwords')
 nltk.download('omw-1.4')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
-
-from nltk import word_tokenize, WordNetLemmatizer
 
 
 class Clickbait_predictor:
