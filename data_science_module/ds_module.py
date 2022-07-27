@@ -5,7 +5,7 @@ from scipy.spatial.distance import cosine
 from data_science_module.clickbait import Clickbait_predictor
 from data_science_module.rationality_intuition.rationality_intuition_scorer import Rationality_intuition_scorer
 from data_science_module.sentiment.sentiment_extractor import Sentiment_extractor
-from utils import translate_text, compare_numerical_facts, compare_ner_facts, get_facts_from_text
+from .utils import translate_text, compare_numerical_facts, compare_ner_facts, get_facts_from_text
 
 
 def text_source_sentiment_score(text, title, text_source, title_source) -> float:
