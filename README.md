@@ -7,6 +7,10 @@
 python==3.9
 
 ```
+nltk.download('stopwords')
+nltk.download('omw-1.4')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
 python -m dostoevsky download fasttext-social-network-model
 ```
 
