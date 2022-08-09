@@ -216,18 +216,11 @@ MULTIPLIER = or_(
 NUM_RAW = rule(morph_pipeline(NUMS_RAW).interpretation(Number.int.normalized().custom(NUMS_RAW.get)))
 NUM_ORDINAL = rule(morph_pipeline(NUMS_ORDINAL).interpretation(Number.int.normalized().custom(NUMS_ORDINAL.get)))
 NUM_INT = rule(INT).interpretation(Number.int.custom(int))
-NUM = or_(
-    NUM_RAW,
-    NUM_INT,
-    NUM_ORDINAL
-).interpretation(Number.int)
-NUMBER = or_(
-    rule(NUM, MULTIPLIER.optional())
-).interpretation(Number)
+
 
 
 def normalize_float(value):
-    value = re.sub('[\s,.]+', '../..', value)
+    value = re.sub('[\s,.]+', '.', value)
     return float(value)
 
 
@@ -283,6 +276,16 @@ FLOAT = rule(
 DIGIT = INT.interpretation(
     interp.custom(int)
 ).interpretation(Number_fact.number)
+
+NUM = or_(
+    NUM_RAW,
+    NUM_INT,
+    FLOAT,
+    NUM_ORDINAL
+).interpretation(Number.int)
+NUMBER = or_(
+    rule(NUM, MULTIPLIER.optional())
+).interpretation(Number)
 
 NUMBER_FACT = rule(or_(FLOAT, DIGIT).interpretation(Number_fact.number),
                    ADJS.optional().interpretation(

@@ -36,6 +36,11 @@ text = 'Бостон признан первым среди европейски
        'Такого рода высокие технологии вряд ли помогут Андронову занять какое-либо место в каком-нибудь конкурсе.'
 text_title = 'Бостон занял первое место среди европейских городов в рейтинге инноваций в медицине, а Андроново отказалось от участия в оценке'
 
+
+text = 'Супруга Марата Шакирзяновича считалась успешной бизнес-леди. В 2014 году она вошла в топ-50 самых богатых спутниц госслужащих по версии издания «Slon». В 2013-м она задекларировала 42,4 млн. руб. годового дохода.'
+text_title = 'Личная жизнь Марата Хуснуллина'
+
+
 sentiment_score = text_source_sentiment_score(text, text_title, text_source, text_source_title)
 
 negative_score, positive_score, neutral_score, skip_score, speech_score, clickbait_score, rationality_score, intuition_score = get_sentiment_scores(
